@@ -6,7 +6,6 @@ import './VideoControls.scss';
 
 function VideoControls(props) {
   const {
-    isPaused,
     isPlaying,
     onPause,
     onPlay,
@@ -14,7 +13,7 @@ function VideoControls(props) {
 
   return (
     <div className="video-controls">
-      {isPaused && (
+      {!isPlaying && (
         <PlayIcon
           className="video-controls__icon"
           onClick={onPlay}
@@ -31,7 +30,6 @@ function VideoControls(props) {
 }
 
 VideoControls.defaultProps = {
-  isPaused: true,
   isPlaying: false,
   onPlay: () => { },
   onPause: () => { },

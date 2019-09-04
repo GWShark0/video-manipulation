@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 
+import Video from './Video';
 import VideoControls from './VideoControls';
-
-function isPaused(videoState) {
-  return videoState === 'PAUSED';
-}
 
 function isPlaying(videoState) {
   return videoState === 'PLAYING';
@@ -14,7 +11,6 @@ function isPlaying(videoState) {
 function VideoPlayer(props) {
   const { src } = props;
   const [videoState, setVideoState] = useState('PAUSED');
-  const videoRef = React.createRef();
 
   const playVideo = () => {
     // videoRef.current.play();
@@ -34,15 +30,11 @@ function VideoPlayer(props) {
 
   return (
     <div>
-      <video
-        className="video"
-        onEnded={pauseVideo}
-        ref={videoRef}
-      >
-        <source src={src} type="video/mp4" />
-      </video>
+      <Video
+        src={src}
+        isPlaying={isPlaying(videoState)}
+      />
       <VideoControls
-        isPaused={isPaused(videoState)}
         isPlaying={isPlaying(videoState)}
         onPause={pauseVideo}
         onPlay={playVideo}
